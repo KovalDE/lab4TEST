@@ -20,7 +20,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final OrderToOrderDTOMapper orderMapper;
 
-    @Value("${limit}")
+    //@Value("${limit}")
     private int limit;
 
     public OrderServiceImpl(final OrderRepository orderRepository, final OrderToOrderDTOMapper orderMapper) {
@@ -31,7 +31,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderDTO> getAllOrders() {
         return orderRepository.getAllOrders().stream()
-                .map(e -> orderMapper.toDTO(e))
+                .map(orderMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
@@ -64,7 +64,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Double getTotalPrice(OrderDTO orderDTO) {
-        Double totalPrice = 0.;
+        double totalPrice = 0.;
         totalPrice += orderDTO.getPizzasDTO().stream().mapToDouble(PizzaDTO::getTotalPrice).sum();
         totalPrice += orderDTO.getDrinksDTO().stream().mapToDouble(DrinksDTO::getPrice).sum();
 

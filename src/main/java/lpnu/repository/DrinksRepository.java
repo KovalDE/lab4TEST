@@ -3,11 +3,13 @@ package lpnu.repository;
 
 import lpnu.entity.Drinks;
 import lpnu.exception.ServiceException;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Repository
 public class DrinksRepository {
     private List<Drinks> drinks = new ArrayList<>();
     private long id = 1;

@@ -3,10 +3,12 @@ package lpnu.repository;
 
 import lpnu.entity.Delivery;
 import lpnu.exception.ServiceException;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+@Repository
 
 public class DeliveryRepository {
     private List<Delivery> deliveries = new ArrayList<>();

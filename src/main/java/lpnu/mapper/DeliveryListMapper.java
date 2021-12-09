@@ -11,7 +11,7 @@ import java.util.List;
 
 @Component
 public class DeliveryListMapper {
-
+    @Autowired
     OrderToOrderDTOMapper orderDTOMapper;
 
     public List<Delivery> toEntity(List<DeliveryDTO> deliveryDTOList){

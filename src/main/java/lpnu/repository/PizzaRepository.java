@@ -2,11 +2,12 @@ package lpnu.repository;
 
 import lpnu.entity.Pizza;
 import lpnu.exception.ServiceException;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Repository
 public class PizzaRepository {
     private List<Pizza> pizzas = new ArrayList<>();
     private long id = 1;

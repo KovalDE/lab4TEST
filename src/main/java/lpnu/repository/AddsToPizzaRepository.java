@@ -2,11 +2,12 @@ package lpnu.repository;
 
 import lpnu.entity.AddsToPizza;
 import lpnu.exception.ServiceException;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Repository
 public class AddsToPizzaRepository {
 
     private List<AddsToPizza> adds = new ArrayList<>();
