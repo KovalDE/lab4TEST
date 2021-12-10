@@ -33,7 +33,7 @@ public class OrderRepository {
     }
 
     public Order updateOrder(Order order){
-        Order savedOrder = getOrdersId(id);
+        Order savedOrder = getOrdersId(order.getId());
 
         savedOrder.setClient(order.getClient());
         savedOrder.setDrinks(order.getDrinks());

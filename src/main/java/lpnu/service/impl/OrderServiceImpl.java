@@ -21,9 +21,6 @@ public class OrderServiceImpl implements OrderService {
     private final PizzaService pizzaService;
 
 
-    //@Value("${limit}")
-    private int limit;
-
     public OrderServiceImpl(final OrderRepository orderRepository, final OrderToOrderDTOMapper orderMapper, PizzaService pizzaService) {
         this.orderRepository = orderRepository;
         this.orderMapper = orderMapper;

@@ -33,7 +33,6 @@ public class OrderResource {
         return orderService.saveOrder(orderDTO);
     }
 
-
     @PutMapping("/orders")
     public OrderDTO updateOrder(@RequestBody  final OrderDTO orderDTO) {
         return orderService.updateOrder(orderDTO);

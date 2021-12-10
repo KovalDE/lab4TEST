@@ -53,21 +53,4 @@ public class OrderTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.totalPrice", is(20.)));
     }
-    @Test
-    public void updateOrder_thenStatus200() throws Exception {
-        List<AddsToPizzaDTO> adds = new ArrayList<>();
-        adds.add(new AddsToPizzaDTO(1L,"adds",10.));
-        List<PizzaDTO> pizzaDTOList = new ArrayList<>();
-        pizzaDTOList.add(new PizzaDTO(1L, "TestName",10.,adds));
-        List<DrinksDTO> drinksDTOList = new ArrayList<>();
-        drinksDTOList.add(new DrinksDTO(1L, "TestName",10., SizeOfDrinks.BIG));
-
-        final OrderDTO orderDTO = new OrderDTO(1L,new ClientDTO(),pizzaDTOList,drinksDTOList,10.);
-
-        mvc.perform(post("/api/v1/orders").contentType(MediaType.APPLICATION_JSON)
-                .content(Objects.requireNonNull(JacksonUtil.serialize(orderDTO))))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.totalPrice", is(20.)));
-    }
 }
