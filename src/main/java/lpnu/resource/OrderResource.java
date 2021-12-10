@@ -1,10 +1,12 @@
 package lpnu.resource;
 
+import lpnu.dto.ClientDTO;
 import lpnu.dto.OrderDTO;
 import lpnu.service.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -26,14 +28,13 @@ public class OrderResource {
         return orderService.getOrderById(id);
     }
 
-
-    @PostMapping(value = "/orders", produces = "application/json", consumes = "application/json")
+    @PostMapping("/orders")
     public OrderDTO saveOrder(@RequestBody final OrderDTO orderDTO) {
         return orderService.saveOrder(orderDTO);
     }
 
 
-    @PutMapping(value = "/orders", produces = "application/json", consumes = "application/json")
+    @PutMapping("/orders")
     public OrderDTO updateOrder(@RequestBody  final OrderDTO orderDTO) {
         return orderService.updateOrder(orderDTO);
     }

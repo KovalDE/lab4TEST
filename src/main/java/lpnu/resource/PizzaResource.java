@@ -12,7 +12,7 @@ import java.util.List;
 public class PizzaResource {
     private PizzaService pizzaService;
 
-    public PizzaResource(final PizzaService orderService) {
+    public PizzaResource(final PizzaService pizzaService) {
         this.pizzaService = pizzaService;
     }
 
@@ -27,13 +27,13 @@ public class PizzaResource {
     }
 
 
-    @PostMapping(value = "/pizza", produces = "application/json", consumes = "application/json")
+    @PostMapping("/pizza")
     public PizzaDTO savePizza(@RequestBody final PizzaDTO pizzaDTO) {
         return pizzaService.savePizza(pizzaDTO);
     }
 
 
-    @PutMapping(value = "/pizza", produces = "application/json", consumes = "application/json")
+    @PutMapping("/pizza")
     public PizzaDTO updatePizza(@RequestBody final PizzaDTO pizzaDTO) {
         return pizzaService.updatePizza(pizzaDTO);
     }

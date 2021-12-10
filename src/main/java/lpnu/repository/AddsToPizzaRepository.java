@@ -32,7 +32,7 @@ public class AddsToPizzaRepository {
     }
 
     public AddsToPizza updateAddsToPizza(AddsToPizza add){
-        AddsToPizza savedAddsToPizza = getAddsToPizzaId(id);
+        AddsToPizza savedAddsToPizza = getAddsToPizzaId(add.getId());
 
         savedAddsToPizza.setName(add.getName());
         savedAddsToPizza.setPrice(add.getPrice());

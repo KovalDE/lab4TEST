@@ -37,8 +37,8 @@ public class PizzaServiceImpl implements PizzaService {
 
     @Override
     public PizzaDTO savePizza(PizzaDTO pizzaDTO) {
+        pizzaDTO.setTotalPrice(pizzaAddsCost(pizzaDTO));
         final Pizza pizza = pizzaDTOMapper.toEntity(pizzaDTO);
-        pizza.setTotalPrice(pizzaAddsCost(pizzaDTO));
         pizzaRepository.savePizza(pizza);
 
         return pizzaDTO;

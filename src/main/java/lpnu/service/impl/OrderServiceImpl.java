@@ -1,6 +1,5 @@
 package lpnu.service.impl;
 
-import lpnu.dto.AddsToPizzaDTO;
 import lpnu.dto.DrinksDTO;
 import lpnu.dto.OrderDTO;
 import lpnu.dto.PizzaDTO;
@@ -8,7 +7,7 @@ import lpnu.entity.Order;
 import lpnu.mapper.OrderToOrderDTOMapper;
 import lpnu.repository.OrderRepository;
 import lpnu.service.OrderService;
-import org.springframework.beans.factory.annotation.Value;
+import lpnu.service.PizzaService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,13 +18,16 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
     private final OrderToOrderDTOMapper orderMapper;
+    private final PizzaService pizzaService;
+
 
     //@Value("${limit}")
     private int limit;
 
-    public OrderServiceImpl(final OrderRepository orderRepository, final OrderToOrderDTOMapper orderMapper) {
+    public OrderServiceImpl(final OrderRepository orderRepository, final OrderToOrderDTOMapper orderMapper, PizzaService pizzaService) {
         this.orderRepository = orderRepository;
         this.orderMapper = orderMapper;
+        this.pizzaService = pizzaService;
     }
 
     @Override
@@ -42,11 +44,15 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDTO saveOrder(final OrderDTO orderDTO) {
+
+        for (PizzaDTO pizzaDTO:orderDTO.getPizzasDTO())
+            pizzaService.savePizza(pizzaDTO);
+
+        orderDTO.setTotalPrice(getTotalPrice(orderDTO));
         final Order order = orderMapper.toEntity(orderDTO);
-        order.setTotalPrice(getTotalPrice(orderDTO));
         orderRepository.saveOrder(order);
 
-        return orderMapper.toDTO(order);
+        return orderDTO;
     }
 
     @Override
@@ -65,8 +71,16 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Double getTotalPrice(OrderDTO orderDTO) {
         double totalPrice = 0.;
-        totalPrice += orderDTO.getPizzasDTO().stream().mapToDouble(PizzaDTO::getTotalPrice).sum();
-        totalPrice += orderDTO.getDrinksDTO().stream().mapToDouble(DrinksDTO::getPrice).sum();
+
+        for (PizzaDTO pizzaDTO : orderDTO.getPizzasDTO()) {
+            if(pizzaService.getAllPizza().stream().anyMatch(e->e.equals(pizzaDTO)))
+                totalPrice += pizzaDTO.getTotalPrice();
+
+        }
+        for (DrinksDTO drinksDTO : orderDTO.getDrinksDTO()) {
+            totalPrice += drinksDTO.getPrice();
+        }
+
 
         return totalPrice;
     }

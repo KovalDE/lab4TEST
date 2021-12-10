@@ -26,7 +26,7 @@ public class DrinksServiceImpl implements DrinksService {
     @Override
     public List<DrinksDTO> getAllDrinks() {
         return drinksRepository.getAllDrinks().stream()
-                .map(e -> drinksDTOMapper.toDTO(e))
+                .map(drinksDTOMapper::toDTO)
                 .collect(Collectors.toList());
     }
 

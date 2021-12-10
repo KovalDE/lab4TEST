@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1")
 public class DrinksResource {
+
     private DrinksService drinksService;
 
     public DrinksResource(final DrinksService drinksService) {
@@ -29,7 +30,7 @@ public class DrinksResource {
     }
 
 
-    @PostMapping(value = "/drinks", produces = "application/json", consumes = "application/json")
+    @PostMapping("/drinks")
     public DrinksDTO saveDrinks(@RequestBody final DrinksDTO drinksDTO) {
         return drinksService.saveDrinks(drinksDTO);
     }

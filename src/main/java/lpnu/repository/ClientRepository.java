@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @Repository
 public class ClientRepository {
-    private List<Client> clients;
+    private List<Client> clients = new ArrayList<>();
 
     private long id = 1;
 

@@ -13,7 +13,7 @@ import java.util.List;
 public class AddsToPizzaResource {
 
     @Autowired
-    private AddsToPizzaService addsToPizzaService;
+    private final AddsToPizzaService addsToPizzaService;
 
     public AddsToPizzaResource(AddsToPizzaService addsToPizzaService) {
         this.addsToPizzaService = addsToPizzaService;
